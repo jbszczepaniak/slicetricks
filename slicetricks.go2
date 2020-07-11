@@ -11,6 +11,7 @@ func main() {
 	fmt.Println(Delete([]int{1,2,3}, 0))
 	fmt.Println(Filter([]int{1,2,3,4,5}, func(x int) bool {return x > 2 }))
 	fmt.Println(Deduplicate([]string{"a", "b", "c", "d", "e", "f", "a", "f"}))
+	fmt.Println(Batch([]bool{true, false, true, false, true, true, false}, 3))
 } 
 
 // Copy copies a slice.
@@ -55,6 +56,8 @@ func Filter(type T)(a []T, f func(t T)bool) []T {
 	return b
 }
 
+// Deduplicate deduplicates.
+// https://github.com/golang/go/wiki/SliceTricks#in-place-deduplicate-comparable
 func Deduplicate(type T ordered) (in []T) []T{
 	sortSlice(in)
 
@@ -70,6 +73,18 @@ func Deduplicate(type T ordered) (in []T) []T{
 		in[j] = in[i]
 	}
 	return in[:j+1]
+}
+
+// Batch batches.
+// https://github.com/golang/go/wiki/SliceTricks#batching-with-minimal-allocation
+func Batch(type T)(in []T, size int) [][]T {
+	batches := make([][]T, 0, (len(in) + size - 1) / size)
+
+	for size < len(in) {
+		in, batches = in[size:], append(batches, in[0:size:size])
+	}
+	batches = append(batches, in)
+	return batches
 }
 
 
