@@ -1,29 +1,6 @@
-package main
+package slicketricks
 
-import (
-	"fmt"
-	"sort"
-)
-
-func main() {
-	fmt.Println(Copy([]int{1,2,3}))
-	
-	fmt.Println(Cut([]int{1,2,3}, 0, 2))
-	
-	fmt.Println(Delete([]int{1,2,3}, 0))
-	
-	fmt.Println(Filter([]int{1,2,3,4,5}, func(x int) bool {return x > 2 }))
-	
-	fmt.Println(Deduplicate([]string{"a", "b", "c", "d", "e", "f", "a", "f"}))
-	
-	fmt.Println(Batch([]bool{true, false, true, false, true, true, false}, 3))
-	
-	haystack := []string{"a", "b", "c", "d", "e"} // [a b c d e]
-	haystack = MoveToFront("c", haystack)         // [c a b d e]
-	fmt.Println(haystack)
-	haystack = MoveToFront("f", haystack)         // [f c a b d e]
-	fmt.Println(haystack)
-} 
+import "sort"
 
 // Copy copies a slice.
 // https://github.com/golang/go/wiki/SliceTricks#copy
