@@ -1,0 +1,52 @@
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println(Copy([]int{1,2,3}))
+	fmt.Println(Cut([]int{1,2,3}, 0, 2))
+	fmt.Println(Delete([]int{1,2,3}, 0))
+	fmt.Println(Filter([]int{1,2,3,4,5}, func(x int) bool {return x > 2 }))
+} 
+
+// Copy copies a slice.
+// https://github.com/golang/go/wiki/SliceTricks#copy
+func Copy(type T)(a []T) []T {
+	b := make([]T, len(a))
+	copy(b, a)
+	return b
+}
+
+// Cut cuts elements.
+// https://github.com/golang/go/wiki/SliceTricks#cut
+func Cut(type T)(a []T, i, j int) []T {
+	var zero T
+	copy(a[i:], a[j:])
+	for k, n := len(a)-j+i, len(a); k < n; k++ {
+		a[k] = zero
+	}
+	a = a[:len(a)-j+i]
+	return a
+}
+
+// Delete deletes element at index.
+// https://github.com/golang/go/wiki/SliceTricks#delete
+func Delete(type T)(a []T, i int) []T {
+	var zero T
+	copy(a[i:], a[i+1:])
+	a[len(a)-1] = zero
+	a = a[:len(a)-1]
+	return a
+}
+
+// Filter fitlers slice based on the predicate.
+// https://github.com/golang/go/wiki/SliceTricks#filtering-without-allocating
+func Filter(type T)(a []T, f func(t T)bool) []T { 
+	b := a[:0]
+	for _, x := range a {
+		if f(x) {
+			b = append(b, x)
+		}
+	}
+	return b
+}
