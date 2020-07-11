@@ -121,7 +121,23 @@ func MoveToFront(type T comparable)(needle T, haystack []T) []T {
 	return append(haystack, prev)
 }
 
+// SlidingWindow slides the window.
+// https://github.com/golang/go/wiki/SliceTricks#sliding-window
+func SlidingWindow(type T)(size int, input []T) [][]T {
+	// returns the input slice as the first element
+	if len(input) <= size {
+		return [][]T{input}
+	}
 
+	// allocate slice at the precise size we need
+	r := make([][]T, 0, len(input)-size+1)
+
+	for i, j := 0, size; j <= len(input); i, j = i+1, j+1 {
+		r = append(r, input[i:j])
+	}
+
+	return r
+}
 
 type ordered interface {
 	type int, int8, int16, int32, int64,
