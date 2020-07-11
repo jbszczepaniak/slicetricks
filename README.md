@@ -1,6 +1,8 @@
 # Slice tricks
 
-Did you remove how to delete an element from the slice? Don't go to https://github.com/golang/go/wiki/SliceTricks again to figure that out, use slicetricks package instead.
+Did you forget how to delete an element from the slice?
+Don't go to https://github.com/golang/go/wiki/SliceTricks anymore to figure that out...
+Use slicetricks package instead!
 
 ## I want to play
 
