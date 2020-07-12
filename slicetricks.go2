@@ -1,4 +1,4 @@
-package slicketricks
+package slicetricks
 
 import "sort"
 

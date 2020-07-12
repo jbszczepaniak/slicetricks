@@ -1,0 +1,21 @@
+package slicetricks
+
+import (
+	"testing"
+)
+
+func TestCopy(t *testing.T) {
+	source := []int{1,2,3}
+	destination := Copy(source)
+	for idx, v := range destination {
+		if source[idx] != v {
+			t.Error("source and destination differ in elements")
+		}
+	}
+	if len(source) != len(destination) {
+		t.Error("source and destination differ in length")
+	}
+	if &source[0] == &destination[0] {
+		t.Error("did not copy correctly")
+	}
+}

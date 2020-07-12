@@ -34,6 +34,14 @@ Use slicetricks package instead!
 }
 ```
 
+## Run tests locally
+Providing that you have goroot repository cloned from `https://go.googlesource.com/go`, on branch `dev.go2go` in directory `$HOME/code/goroot`.
+```
+source .env
+go tool go2go build
+go test -v
+```
+
 ## Problems with the package
 1. Go generics not official yet
 2. Panics a lot if you put wrong indices
